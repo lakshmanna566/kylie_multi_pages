@@ -1,0 +1,19 @@
+
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Shop - Kylie Cosmetics</title><link rel="stylesheet" href="style.css"/></head><body>
+<header class="site-header"><div class="container navwrap"><div class="logo">KYLIE COSMETICS</div><nav class="nav"><a href="index.html">Home</a><a href="shop.html" class="active">Shop</a><a href="about.html">About</a><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></nav></div></header>
+<main class="container shop-section"><h2 class="section-title">Shop</h2>
+  <div class="category"><h3>Lips</h3><div class="products" id="lips-list"></div></div>
+  <div class="category"><h3>Eyes</h3><div class="products" id="eyes-list"></div></div>
+  <div class="category"><h3>Face</h3><div class="products" id="face-list"></div></div>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 Kylie Cosmetics Fan Site — Designed for demo purposes.</p></div></footer>
+<script src="products.js"></script><script src="cart.js"></script>
+<script>
+function createCard(p){
+  const el = document.createElement('article'); el.className='product';
+  el.innerHTML = `<div><div class="img-wrap"><img src="${p.img}" alt="${p.name}"></div><h4>${p.name}</h4><div class="price">$${p.price.toFixed(2)}</div></div><div><div class="controls"><button class="btn small" onclick="document.getElementById('details-'+${p.id}).style.display='block'">View Details</button><button class="btn small" onclick="addToCart(${p.id})">Add to Cart</button></div><div class="details" id="details-${p.id}">${p.desc}</div></div>`;
+  return el;
+}
+document.addEventListener('DOMContentLoaded', ()=>{ const lips=document.getElementById('lips-list'),eyes=document.getElementById('eyes-list'),face=document.getElementById('face-list'); window.KC_PRODUCTS.forEach(p=>{ const card=createCard(p); if(p.category==='Lips') lips.appendChild(card); if(p.category==='Eyes') eyes.appendChild(card); if(p.category==='Face') face.appendChild(card); }); updateCartCount(); });
+</script>
+</body></html>
